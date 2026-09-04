@@ -90,7 +90,7 @@ if __name__ == "__main__":
         print(f"posts that are mine: {len(client.list_posts(mine=True))}")
 
         fetched = client.get_post(new_post["id"])
-        print(f"fetched post {fetched['id']}: {fetched['title']}")
+        print(f"fetched post {fetched['id']}: {fetched['title']} - {fetched['body']}")
 
         updated = client.update_post(new_post["id"], title="Week 3 lab (updated)", body="this post is updated ")
         print(f"updated post {updated['id']}: {updated['title']}")
