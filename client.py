@@ -108,3 +108,9 @@ if __name__ == "__main__":
         client.get_post(deletable_post["id"])
     except ValueError as e:
         print(f"expected failure fetching deleted post: {e}")
+
+    # unhappy path: post 7 belongs to someone else, so this should 403
+    try:
+        client.update_post(7, title="Hijacked title")
+    except ValueError as e:
+        print(f"expected failure updating someone else's post: {e}")
