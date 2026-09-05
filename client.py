@@ -92,16 +92,19 @@ if __name__ == "__main__":
         fetched = client.get_post(new_post["id"])
         print(f"fetched post {fetched['id']}: {fetched['title']} - {fetched['body']}")
 
-        updated = client.update_post(new_post["id"], title="Week 3 lab (updated)", body="this post is updated ")
+        updated = client.update_post(new_post["id"], title="Week 3 lab (updated)", body="this post is updated", tags=["updated"])
         print(f"updated post {updated['id']}: {updated['title']}")
 
-        client.delete_post(new_post["id"])
-        print(f"deleted post {new_post['id']}")
+        deletable_post = client.create_post("Scratch post", body="This post is only here to be deleted.")
+        print(f"created post {deletable_post['id']}: {deletable_post['title']}")
+
+        client.delete_post(deletable_post["id"])
+        print(f"deleted post {deletable_post['id']}")
     except ValueError as e:
         print(f"request failed: {e}")
 
     # unhappy path: the post above no longer exists, so this should 404
     try:
-        client.get_post(new_post["id"])
+        client.get_post(deletable_post["id"])
     except ValueError as e:
         print(f"expected failure fetching deleted post: {e}")
